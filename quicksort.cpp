@@ -22,7 +22,7 @@ void qs(int a[],int start,int end)
 }
 int main()
 {
-	int a[10] = { 2,5,10,4,6,3,9,1,7,8 };
+	int a[] = { 2,5,10,4,6,3,9,1,7,8 };
 	int len = sizeof(a) / sizeof(int);
 	qs(a,0,len-1);
 	for (int i = 0; i < len; i++)
