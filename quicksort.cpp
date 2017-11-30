@@ -1,4 +1,4 @@
-//ÔüÔü¿ìÅÅ
+//æ¸£æ¸£å¿«æ’
 #include<iostream>
 using namespace std;
 void qs(int a[],int start,int end)
