@@ -1,4 +1,5 @@
 //Greedy method in Solution#4
+//this one is better.
 class Solution {
 public:
     bool canJump(vector<int>& nums) {
