@@ -1,7 +1,6 @@
-//too slow
+//关键是确定每一行只能并且一定要放一个queen。明确了这一点之后时间从144ms优化到3ms
 class Solution {
 public:
-    //vector<vector<string>> result;
     int count;
     vector<string> current;
     vector<bool> hashheng;
@@ -10,30 +9,25 @@ public:
     vector<bool> hashfandui;
     int n;
     int remain;
-    void dfs(int pos = 0)
+    void dfs(int i)
     {
         if(remain==0)
         {
-            //cout<<"found"<<endl;
-            //result.push_back(current);
             count++;
             return;
         }
-        int i = pos/n;
-        int j = pos%n;
-        while(i<n)
+        int j = 0;
+        while(j<n)
         {
-            
-                if(current[i][j]=='.' && hashheng[i]==0 && hashshu[j]==0 &&hashdui[j-i+n-1]==0 &&hashfandui[i+j]==0)
+                if(hashheng[i]==0 && hashshu[j]==0 &&hashdui[j-i+n-1]==0 &&hashfandui[i+j]==0)
                 {
-                    //cout<<i<<' '<<j<<' '<<remain<<endl;
                     current[i][j] = 'Q';
                     hashheng[i] = 1;
                     hashshu[j] = 1;
                     hashdui[j-i+n-1] = 1;
                     hashfandui[i+j] = 1;
                     remain--;
-                    dfs(i*n+j+1);
+                    dfs(i+1);
                     current[i][j] = '.';
                     hashheng[i] = 0;
                     hashshu[j] = 0;
@@ -42,11 +36,6 @@ public:
                     remain++;
                 }
             j++;
-            if(j==n)
-            {
-                j=0;
-                i++;
-            }
         }
     }
     int totalNQueens(int n) {
@@ -59,7 +48,7 @@ public:
         current = vector<string>(n,temp);
         this->n = n;
         remain = n;
-        dfs();
+        dfs(0);
         return count;
     }
 };
