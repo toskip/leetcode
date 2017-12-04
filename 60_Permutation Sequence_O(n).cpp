@@ -1,4 +1,4 @@
-//O(n)方法
+//O(n)方法，速度最快
 //写的太蠢了 以后再想怎么写的好看一点
 class Solution {
 public:
