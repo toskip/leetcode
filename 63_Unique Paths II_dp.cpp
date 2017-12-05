@@ -1,3 +1,4 @@
+//easy
 int dp[101][101];
 class Solution {
 public:
