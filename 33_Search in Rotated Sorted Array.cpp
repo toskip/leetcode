@@ -20,7 +20,6 @@ public:
             {
                 return low;
             }
-            
             if(nums[mid]<nums[low])
             {
                 if(target<nums[low] && target>nums[mid])
@@ -43,9 +42,7 @@ public:
                     low = mid+1;
                 }
             }
-            
         }
         return -1;
-        
     }
 };
