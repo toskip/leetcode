@@ -2,9 +2,8 @@
 class Solution {
 public:
     bool binSearch(vector<int>& a, int target) {
-        int  num = a.size();
         int low = 0;
-        int high = num-1;
+        int high = a.size()-1;
         int mid;
         while(low<=high)
         {
