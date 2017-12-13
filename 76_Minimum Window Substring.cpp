@@ -1,5 +1,3 @@
-//20171213总算独立做出一道hard，纪念一下
-//击败10%
 class Solution {
 public:
     string minWindow(string s, string t) {
@@ -16,10 +14,7 @@ public:
         {
             if(dict.count(s[i]))
             {
-                if(dict2[s[i]]<dict[s[i]])
-                {
-                    ++count;
-                }
+                if(dict2[s[i]]<dict[s[i]]) ++count;
                 ++dict2[s[i]];
                 if(count<n2) continue;
                 while(!dict.count(s[left])||dict2[s[left]]>dict[s[left]])
@@ -34,10 +29,6 @@ public:
                 }
             }
         }
-        if(start==-1) return "";
-        else return s.substr(start,len);
-    }
-};
         if(start==-1) return "";
         else return s.substr(start,len);
     }
