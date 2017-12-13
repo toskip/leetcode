@@ -5,12 +5,12 @@ public:
         map<char,int> dict2;
         int n1 = s.size();
         int n2 = t.size();
-        for(int i = 0;i<n2;i++) ++dict[t[i]];
+        for(int i = 0;i<n2;++i) ++dict[t[i]];
         int left = 0;
         int count = 0;
         int len = n1;
         int start = -1;
-        for(int i=0;i<n1;i++)
+        for(int i=0;i<n1;++i)
         {
             if(dict.count(s[i]))
             {
