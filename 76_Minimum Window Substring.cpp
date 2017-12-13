@@ -16,7 +16,6 @@ public:
         {
             if(dict.count(s[i]))
             {
-                
                 if(dict2[s[i]]<dict[s[i]])
                 {
                     ++count;
@@ -25,11 +24,7 @@ public:
                 if(count<n2) continue;
                 while(!dict.count(s[left])||dict2[s[left]]>dict[s[left]])
                 {
-                    if(dict.count(s[left]))
-                    {
-                        --dict2[s[left]];
-                        if(dict2[s[left]]<dict[s[left]])--count;
-                    }
+                    if(dict.count(s[left])) --dict2[s[left]];
                     ++left;
                 }
                 if(count==n2 && i-left+1<=len)
@@ -39,6 +34,10 @@ public:
                 }
             }
         }
+        if(start==-1) return "";
+        else return s.substr(start,len);
+    }
+};
         if(start==-1) return "";
         else return s.substr(start,len);
     }
