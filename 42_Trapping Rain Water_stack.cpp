@@ -13,7 +13,6 @@ public:
                 st.pop();
                 if (st.empty()) break;
                 distance = i-st.top()-1;
-                
                 sum+=(min(height[st.top()],height[i])-height[top])*distance;
             }
             st.push(i);
