@@ -2,7 +2,6 @@ class Solution {
 public:
     string minWindow(string s, string t) {
         map<char,int> dict;
-        map<char,int> dict2;
         int n1 = s.size();
         int n2 = t.size();
         for(int i = 0;i<n2;++i) ++dict[t[i]];
@@ -14,12 +13,12 @@ public:
         {
             if(dict.count(s[i]))
             {
-                if(dict2[s[i]]<dict[s[i]]) ++count;
-                ++dict2[s[i]];
+                if(dict[s[i]]>0) ++count;
+                --dict[s[i]];
                 if(count<n2) continue;
-                while(!dict.count(s[left])||dict2[s[left]]>dict[s[left]])
+                while(!dict.count(s[left])||dict[s[left]]<0)
                 {
-                    if(dict.count(s[left])) --dict2[s[left]];
+                    if(dict.count(s[left])) ++dict[s[left]];
                     ++left;
                 }
                 if(count==n2 && i-left+1<=len)
