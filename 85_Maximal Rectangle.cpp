@@ -1,6 +1,6 @@
 class Solution {
 public:
-    int largestRectangleArea(vector<int>& heights) {
+    int largestRectangleArea(vector<char>& heights) {
         stack<int> st;
         int n = heights.size();
         int result = 0;
@@ -30,21 +30,19 @@ public:
         int m =matrix.size();
         if(m==0) return 0;
         int n  = matrix[0].size();
-        vector<int> temp(n,0);
-        vector<vector<int>> matrix2(m,temp);
-        for(int j = 0;j<n;j++) matrix2[0][j] = matrix[0][j]-'0';
+        for(int j = 0;j<n;j++) matrix[0][j]-='0';
         for(int i =1;i<m;i++)
         {
             for(int j = 0;j<n;j++)
             {
-                if(matrix[i][j]=='0') matrix2[i][j] = 0;
-                else matrix2[i][j] = matrix2[i-1][j]+1;
+                if(matrix[i][j]=='0') matrix[i][j] = 0;
+                else matrix[i][j] = matrix[i-1][j]+1;
             }
         }
         int result = 0;
         for(int i = 0;i<m;i++)
         {
-            result = max(result,largestRectangleArea(matrix2[i]));
+            result = max(result,largestRectangleArea(matrix[i]));
         }
         return result;
     }
