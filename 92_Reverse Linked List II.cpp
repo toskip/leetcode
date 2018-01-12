@@ -1,4 +1,3 @@
-//巨蠢
 /**
  * Definition for singly-linked list.
  * struct ListNode {
@@ -11,47 +10,19 @@ class Solution {
 public:
     ListNode* reverseBetween(ListNode* head, int m, int n) {
         if(m==n) return head;
-        ListNode* prev;
         ListNode* cur =new ListNode(0);
         cur->next = head;
         head = cur;
-        ListNode* next;
-        int count = -1;
-        ListNode* start;
-        ListNode* end;
-        bool reverse = false;
-        bool ok =true;
-        while(ok)
+        for(int i = 0;i<m-1;i++) cur = cur->next;
+        ListNode* before = cur;
+        cur = cur->next;
+        ListNode* temp;
+        for(int i = 0;i<n-m;i++)
         {
-            ++count;
-            //cout<<count<<endl;
-            if(count==m-1)
-            {
-                start =cur;
-                end = cur->next;
-                prev = cur->next;
-            }
-            else if(count==m+1)
-            {
-                reverse =true;
-            }
-            if(count==n)
-            {
-                start->next = cur;
-                end->next = cur->next;
-                ok = false;
-            }
-            if(reverse)
-            {
-                next= cur->next;
-                cur->next = prev;
-                prev = cur;
-                cur = next;
-            }
-            else
-            {
-                cur = cur->next;
-            }
+            temp = cur->next;
+            cur->next=  temp->next;
+            temp->next = before->next;
+            before ->next = temp;
         }
         return head->next;
     }
