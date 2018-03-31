@@ -1,7 +1,7 @@
 //渣渣快排
 #include<iostream>
 using namespace std;
-void qs(int a[],int start,int end)
+void qs(int* a,int start,int end)
 {
 	//cout << sizeof(a)<< endl;
 	int first = start;
