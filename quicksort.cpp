@@ -10,13 +10,9 @@ void qs(int a[],int start,int end)
 	{
 		while (a[end] >= a[first] && start != end) end--;
 		while (a[start] <= a[first] && start != end) start++;
-		int temp = a[start];
-		a[start] = a[end];
-		a[end] = temp;
+		swap(a[start],a[end]);
 	}
-	int temp = a[first];
-	a[first] = a[end];
-	a[end] = temp;
+	swap(a[first],a[end]);
 	if(first<end-1) qs(a,first,end-1);
 	if(last>end+1) qs(a,end+1,last);
 }
