@@ -1,3 +1,4 @@
+//之前那个是抄的，这个是自己写的，虽然有点墨迹
 /**
  * Definition for singly-linked list.
  * struct ListNode {
@@ -9,21 +10,27 @@
 class Solution {
 public:
     ListNode* reverseBetween(ListNode* head, int m, int n) {
-        if(m==n) return head;
-        ListNode* cur =new ListNode(0);
-        cur->next = head;
-        head = cur;
-        for(int i = 0;i<m-1;i++) cur = cur->next;
-        ListNode* before = cur;
-        cur = cur->next;
-        ListNode* temp;
-        for(int i = 0;i<n-m;i++)
+        ListNode* result = new ListNode(0);
+        result->next = head;
+        head = result;
+        ListNode* beforestart = result;
+        int i = 0;
+        for(;i<m;i++)
         {
-            temp = cur->next;
-            cur->next=  temp->next;
-            temp->next = before->next;
-            before ->next = temp;
+            beforestart = head;
+            head = head->next;
         }
-        return head->next;
+        ListNode* prev=NULL;
+        ListNode* next;
+        for(;i<=n;i++)
+        {
+            next = head->next;
+            head->next = prev;
+            prev = head;
+            head = next;
+        }
+        beforestart->next->next = head;
+        beforestart->next = prev;
+        return result->next;
     }
 };
