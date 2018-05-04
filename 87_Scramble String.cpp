@@ -1,4 +1,4 @@
-//TLE 等会再改
+//递归之前先看看里面每种字母个数是否相同
 class Solution {
 public:
     bool isScramble(string s1, string s2) {
@@ -10,6 +10,17 @@ public:
         if(s1==s2)
             return true;
         int len  =s1.size();
+        int count[26]={};
+        for(int i=0; i<len; i++)
+        {
+            count[s1[i]-'a']++;
+            count[s2[i]-'a']--;
+        }
+        for(int i=0; i<26; i++)
+        {
+            if(count[i]!=0)
+                return false;
+        }
         bool result = false;
         for(int i = 1; i<len;i++)
         {
