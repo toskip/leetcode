@@ -7,37 +7,17 @@ public:
     }
     bool digui(string s1,string s2)
     {
-        
-        int len  =s1.size();
-        //int len2 = s2.size();
-        //int len = min(len1,len2);
         if(s1==s2)
-        {
-            //cout<<s1<<' '<<s2<<' '<<1<<endl;
             return true;
-        }
-        //cout<<s1<<' '<<s2<<endl;
+        int len  =s1.size();
         bool result = false;
         for(int i = 1; i<len;i++)
         {
-            string s1left = s1.substr(0,i);
-            string s1right = s1.substr(i,len-i);
-            string s2left = s2.substr(0,i);
-            string s2right = s2.substr(i,len-i);
-            if((digui(s1left,s2left) && digui(s1right,s2right)))
-            {
-                result = true;
-                break;
-            }
-            s2left = s2.substr(len-i,i);
-            s2right = s2.substr(0,len-i);
-            if((digui(s1left,s2left) && digui(s1right,s2right)))
-            {
-                result = true;
-                break;
-            }
+            if(digui(s1.substr(0,i),s2.substr(0,i)) && digui(s1.substr(i),s2.substr(i)))
+                return true;
+            if(digui(s1.substr(0,i),s2.substr(len-i)) && digui(s1.substr(i),s2.substr(0,len-i)))
+                return true;
         }
-        //cout<<s1<<' '<<s2<<' '<<result<<endl;
-        return result;
+        return false;
     }
 };
