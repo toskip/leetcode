@@ -1,3 +1,4 @@
+//查找map内是否不存在某键的方法：lookup.find(head->next)==lookup.end()
 /**
  * Definition for singly-linked list with a random pointer.
  * struct RandomListNode {
