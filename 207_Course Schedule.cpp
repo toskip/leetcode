@@ -8,8 +8,8 @@ public:
         int total = 0;
         for(int i = 0;i<prerequisites.size();i++)
         {
-            al[prerequisites[i].first].push_back(prerequisites[i].second);
-            count[prerequisites[i].second]++;
+            al[prerequisites[i].second].push_back(prerequisites[i].first);
+            count[prerequisites[i].first]++;
         }
         for(int i = 0;i<numCourses;i++)
         {
