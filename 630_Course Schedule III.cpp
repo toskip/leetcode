@@ -1,4 +1,5 @@
 //WA，摸索中
+//https://www.cnblogs.com/grandyang/p/7126289.html
 class Solution {
 public:
     static bool cmp1(vector<int> a,vector<int> b)
