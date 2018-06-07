@@ -1,3 +1,7 @@
+/*
+https://segmentfault.com/a/1190000008575379
+KMP算法（1）：如何理解KMP
+*/
 class Solution {
 public:
     void GetNext(string P, vector<int> &next)
