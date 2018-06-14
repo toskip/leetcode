@@ -4,12 +4,10 @@ public:
         string s="";
         while(n)
         {
-            int temp = n%26;
-            if(!temp) temp=26;
-            s+='@'+temp;
-            n = (n-temp)/26;
+            n--;
+            s=(char)('A'+n%26)+s;
+            n /=26;
         }
-        reverse(s.begin(),s.end());
         return s;
     }
 };
