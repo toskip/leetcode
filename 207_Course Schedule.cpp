@@ -1,37 +1,31 @@
 class Solution {
 public:
     bool canFinish(int numCourses, vector<pair<int, int>>& prerequisites) {
-        queue<int> q;
         vector<int> temp;
-        vector<vector<int> > al(numCourses,temp);
-        vector<int> count(numCourses,0);
-        int total = 0;
-        for(int i = 0;i<prerequisites.size();i++)
+        vector<vector<int> > adjlist(numCourses,temp);
+        vector<int> indegree(numCourses,0);
+        queue<int> ok;
+        int len = prerequisites.size();
+        for(int i = 0;i<len;i++)
         {
-            al[prerequisites[i].second].push_back(prerequisites[i].first);
-            count[prerequisites[i].first]++;
+            adjlist[prerequisites[i].second].push_back(prerequisites[i].first);
+            indegree[prerequisites[i].first]++;
         }
         for(int i = 0;i<numCourses;i++)
         {
-            if(!count[i])
-            {
-                total++;
-                q.push(i);
-            }
+            if(!indegree[i]) ok.push(i);
         }
-        while(!q.empty())
+        int count = 0;
+        while(!ok.empty())
         {
-            int cur = q.front();
-            q.pop();
-            for(int i = 0;i<al[cur].size();i++)
+            count++;
+            for(int i = 0;i<adjlist[ok.front()].size();i++)
             {
-                if(!--count[al[cur][i]])
-                {
-                    total++;
-                    q.push(al[cur][i]);
-                }
+                indegree[adjlist[ok.front()][i]]--;
+                if(!indegree[adjlist[ok.front()][i]]) ok.push(adjlist[ok.front()][i]);
             }
+            ok.pop();
         }
-        return total == numCourses;
+        return count==numCourses;
     }
 };
