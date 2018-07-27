@@ -1,4 +1,4 @@
-几种排序方法
+//几种排序方法
 #include<iostream>
 using namespace std;
 //堆排序开始
