@@ -1,4 +1,3 @@
-//记住这个写法吧 我觉得这是二分查找最好的写法
 class Solution {
 public:
     bool binSearch(vector<int>& a, int target) {
