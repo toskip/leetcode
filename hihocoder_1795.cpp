@@ -8,18 +8,19 @@ map<int,int> cache;
 int* a;
 int* k;
 int n,m,c;
-int dfs(int m)
+int dfs(int target)
 {
 	int result=0;
 	for(int i = 0;i<c;i++)
 	{
-		if(cache.find(m-k[i])==cache.end())
+		if(!cache.count(target-k[i]))
 		{
-			cache[m-k[i]] = dfs(m-k[i]);
+			cache[target-k[i]] = dfs(target-k[i]);
 		}
-		result+=cache[m-k[i]]%BIG;
+		result+=cache[target-k[i]];
+		result%=BIG;
 	}
-	return result%BIG;
+	return result;
 }
 int main()
 {
@@ -32,6 +33,14 @@ int main()
 		cache[i] = a[i];
 	}
 	for(int i = 0;i<c;i++)cin>>k[i];
-	cout<<dfs(m)<<endl;
+	int result;
+	if(m<=n)
+    {
+        result =a[m-1];
+    }
+    else  result = dfs(m-1);
+    //for(int i = 0;i<m;i++)
+    //cout<<i<<' '<<cache[i]<<endl;
+	cout<<result<<endl;
 	return 0;
 }
