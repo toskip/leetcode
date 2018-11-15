@@ -1,4 +1,5 @@
-//优化中
+//O(n^2)达成，优化还是有用滴
+class Solution {
 public:
     bool isMatch(string s, string p) {
         //vector<bool> temp(s.size()+1,0);
@@ -26,12 +27,16 @@ public:
                 
                 dp[i][0] = dp[i-1][0];
                 for(int j = 1;j<=s.size();j++)
-                {
+                {   
+                    dp[i][j] = dp[i-1][j] || dp[i][j-1];
+                    /*
                     dp[i][j] = dp[i-1][j];
                     for(int k = 0;k<j && dp[i][j]==0;k++)
                     {
                         dp[i][j] = dp[i][k];
                     }
+                    */
+                    //dp[i][j] = 1;
                 }
             } 
             else
