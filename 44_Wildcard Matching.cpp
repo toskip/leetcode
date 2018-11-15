@@ -1,26 +1,42 @@
-//特别挫的dp 击败了2.79%
-//https://leetcode.com/submissions/detail/189719094/
-class Solution {
+//优化中
 public:
     bool isMatch(string s, string p) {
-        vector<bool> temp(s.size()+1,0);
-        vector<vector<bool> > dp(p.size()+1,temp);
+        //vector<bool> temp(s.size()+1,0);
+        //vector<vector<bool> > dp(p.size()+1,temp);
+        bool** dp = new bool*[p.size()+1];
+        for(int i = 0;i<=p.size();i++)
+        {
+            dp[i] = new bool[s.size()+1];
+            //memset(dp[i],0,sizeof(bool)*(s.size()+1));
+            fill(dp[i],dp[i]+(s.size()+1),0);
+        }
+        //fill(dp,dp+(s.size()+1)*(p.size()+1),0);
         dp[0][0] = 1;
         for(int i = 1;i<=p.size();i++)
         {
-            if(p[i-1]=='*') dp[i][0] = dp[i-1][0];
-            for(int j = 1;j<=s.size();j++)
-            {
-                if(p[i-1]=='?')
+            if(p[i-1]=='?')
+            {                
+                for(int j = 1;j<=s.size();j++)
                 {
                     dp[i][j] = dp[i-1][j-1];
                 }
-                else if(p[i-1] =='*')
+            }
+            else if(p[i-1] =='*')
+            {
+                
+                dp[i][0] = dp[i-1][0];
+                for(int j = 1;j<=s.size();j++)
                 {
                     dp[i][j] = dp[i-1][j];
-                    for(int k = 0;k<j;k++) dp[i][j] = dp[i][j] || dp[i][k];
+                    for(int k = 0;k<j && dp[i][j]==0;k++)
+                    {
+                        dp[i][j] = dp[i][k];
+                    }
                 }
-                else
+            } 
+            else
+            {                
+                for(int j = 1;j<=s.size();j++)
                 {
                     dp[i][j] =(dp[i-1][j-1] && p[i-1]==s[j-1]);
                 }
