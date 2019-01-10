@@ -35,22 +35,19 @@ public:
 					temp = result[endpos].second;
 					result[endpos].second = buildings[i][2];
 				}
-				endpos++;			
+				endpos++;
 			}
 			if (endpos == result.size()) //第i个建筑物的终点在所有的关键点后面
 			{
 				//直接插到最后，加入关键点
 				result.push_back(make_pair(buildings[i][1], 0));
 			}
-			else if(buildings[i][1] != result[endpos].first)
+			else if(buildings[i][1] != result[endpos].first && buildings[i][2] >= result[endpos - 1].second)
 			{
 				//比较前面一个关键点和第i个建筑物终点哪个高
-				if (buildings[i][2] >= result[endpos - 1].second)
-				{
-					//把终点作为关键点插入
-					if (temp == -1) temp = result[startpos - 1].second;
-					result.insert(result.begin() + endpos, make_pair(buildings[i][1], temp));
-				}
+				//把终点作为关键点插入
+				if (temp == -1) temp = result[startpos - 1].second;
+				result.insert(result.begin() + endpos, make_pair(buildings[i][1], temp));
 			}
 		}
 		//最后合并相同高度的关键点
