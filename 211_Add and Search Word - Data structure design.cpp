@@ -16,13 +16,13 @@ public:
         
         for(char ch: word)
         {
-            if(!cur->next[ch])
+            if(cur->next.find(ch)==cur->next.end())
             {
                 cur->next[ch] = new TrieNode;
             }
             cur = cur->next[ch];
         }
-        cur->next['\0'] = new TrieNode;
+        if(!cur->next['\0']) cur->next['\0'] = new TrieNode;
     }
     
     /** Returns if the word is in the trie. */
@@ -38,24 +38,25 @@ public:
             dfs.pop();
             if(i==word.size())
             {
-                ok |= (bool)cur->next['\0'];
+                ok |= (cur->next.find('\0')!=cur->next.end());
+                
             }
             else
             {
                 if(word[i]=='.')
                 {
 
-                    for(char ch = 'a';ch<='z';ch++)
+                    for(auto it = cur->next.begin();it!=cur->next.end();++it)
                     {
-                        if(cur->next[ch])
+                        if(it->first!='\0')
                         {
-                            dfs.push(make_pair(cur->next[ch],i+1));
+                            dfs.push(make_pair(it->second,i+1));
                         }
                     }
                 }
                 else
                 {
-                    if(cur->next[word[i]])
+                    if(cur->next.find(word[i])!=cur->next.end())
                     {
                         dfs.push(make_pair(cur->next[word[i]],i+1));
                     }
