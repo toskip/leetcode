@@ -1,3 +1,4 @@
+//终于能手写了
 class Solution {
 public:
     string haystack;
