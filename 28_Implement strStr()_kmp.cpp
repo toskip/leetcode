@@ -18,29 +18,26 @@ public:
             }
             next[++i] = j+1;
         }
-        for(int i = 0;i<=needle.size();i++)
-        {
-            cout<<next[i]<<' ';
-        }
-        cout<<endl;
     }
     int kmp(string haystack,string needle)
     {
+        if(needle.size()==0) return 0;
         this->haystack = haystack;
         this->needle = needle;
         getNext();
         int i  = 0;
-        int j  = 1;
+        int j  = 0;
         while(i<haystack.size())
         {
-            
-            while(next[j]!=-1 && needle[j]!=needle[next[j]])
+            while(j!=-1 && haystack[i]!=needle[j])
             {
                 j = next[j];
             }
-            next[i] = j;
+            ++j;
+            ++i;
+            if(j==needle.size()) return i-j;
         }
-        return i-needle.size();
+        return -1;
     }
     int strStr(string haystack, string needle) {
         return kmp(haystack,needle);
