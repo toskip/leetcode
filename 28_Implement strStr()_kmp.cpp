@@ -1,55 +1,48 @@
-//kmp算法，温故而知新
 class Solution {
-private:
-    string haystack,needle;
-    int* next;
 public:
+    string haystack;
+    string needle;
+    int* next;
     void getNext()
     {
-        next = new int[needle.size()+1];
-        int i = 0;
-        int j  = -1;
+        next= new int[needle.size()+1];
         next[0] = -1;
+        int i= 0;
         while(i<needle.size())
         {
-            if(j==-1 || needle[i]==needle[j])
-            {
-                i++;
-                j++;
-                next[i] = j;
-            }
-            else
+            //abdabdabab
+            int j = next[i];
+            while(j!=-1 && needle[i]!=needle[j])
             {
                 j = next[j];
             }
+            next[++i] = j+1;
         }
-    }
-    int kmp()
-    {
-        if(needle.size()==0) return 0;
-        getNext();
-        int i  = 0;
-        int j  = 0;
-        while(i<haystack.size())
+        for(int i = 0;i<=needle.size();i++)
         {
-            if(j==-1 || haystack[i]==needle[j])
-            {
-                i++;
-                j++;
-                if(j==needle.size()) return i-needle.size();
-            }
-            else
-            {
-                j = next[j];
-            }
+            cout<<next[i]<<' ';
         }
-        return -1;
-        
+        cout<<endl;
     }
-    int strStr(string haystack, string needle) {
-        
+    int kmp(string haystack,string needle)
+    {
         this->haystack = haystack;
         this->needle = needle;
-        return kmp();
+        getNext();
+        int i  = 0;
+        int j  = 1;
+        while(i<haystack.size())
+        {
+            
+            while(next[j]!=-1 && needle[j]!=needle[next[j]])
+            {
+                j = next[j];
+            }
+            next[i] = j;
+        }
+        return i-needle.size();
+    }
+    int strStr(string haystack, string needle) {
+        return kmp(haystack,needle);
     }
 };
