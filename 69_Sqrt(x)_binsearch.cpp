@@ -5,11 +5,11 @@ public:
         if(x==0) return 0;
         int low = 1;
         int high = x;
-        int mid = (high+low)/2;
+        int mid ;
         while(true)
         {
             //cout<<low<<' '<<high<<' '<<mid<<endl;
-            mid =(high+low)/2;
+            mid =low+(high-low)/2;
             if(mid>x/mid) high =mid-1;
             else
             {            
