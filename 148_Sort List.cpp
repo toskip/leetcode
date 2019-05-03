@@ -29,7 +29,7 @@ public:
         while(stride<length){
             p1 = head;
             ListNode* p2 = p1;
-            for(int i = 0;i<=length/(stride*2);i++)
+            for(int i = 0;i<length/(stride*2)+1;i++)
             {
                 p1 = p2;
                 bool stop = false;
