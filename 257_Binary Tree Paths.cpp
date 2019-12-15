@@ -9,34 +9,35 @@
  */
 class Solution {
 public:
-    string path;
+    vector<int> path;
     vector<string> result;
     void digui(TreeNode* cur){
         //cout<<cur->val<<endl;
         //cout<<path<<endl;
         if(!cur->left&&!cur->right){
-            result.push_back(path);
+            string temp = "";
+            for(int i = 0;i<path.size()-1;i++){
+                temp+=to_string(path[i])+"->";
+            }
+            temp+=to_string(path[path.size()-1]);
+            result.push_back(temp);
             return;
         }
         if(cur->left){
-            path+="->"+to_string(cur->left->val);
+            path.push_back(cur->left->val);
             digui(cur->left);
-            int i = path.size()-1;
-            while(path[i]!='-'||!isdigit(path[i-1]))i--;
-            path = path.substr(0,i);
+            path.pop_back();
         }
         if(cur->right){
-            path+="->"+to_string(cur->right->val);
+            path.push_back(cur->right->val);
             digui(cur->right);
-            int i = path.size()-1;
-            while(path[i]!='-'||!isdigit(path[i-1]))i--;
-            path = path.substr(0,i);
+            path.pop_back();
         }
     }
     vector<string> binaryTreePaths(TreeNode* root) {
 
         if(root){
-            path = to_string(root->val);
+            path.push_back(root->val);
             digui(root);
         }
         
