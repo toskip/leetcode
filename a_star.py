@@ -21,7 +21,8 @@ class AStar:
         self._close_list = []
         self._open_list.append(self._start)
     def run(self):
-        while len(self._open_list)!=0 and self._target not in self._open_list:
+        #while len(self._open_list)!=0 and self._target not in self._open_list:
+        while len(self._open_list)!=0:
             # find the smallest one
             current = min(self._open_list,key=lambda x:self._f[x[0]][x[1]])
             current_i = self._open_list.index(current)
