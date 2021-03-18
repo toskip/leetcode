@@ -1,4 +1,5 @@
 import time
+import json
 class AStar:
     def __init__(self):
         #显示地图
@@ -13,7 +14,7 @@ class AStar:
         self._d2 = [[1,0],[0,1],[-1,0],[0,-1],[1,1],[-1,1],[-1,-1],[1,-1]] #右下左下左上右上
         self._cost1=[10,10,10,10]
         self._cost2 = [10,10,10,10,14,14,14,14]
-        self._arrow = {str([1,0]):'↓',str([0,1]):'→',str([-1,0]):'↑',str([0,-1]):'←',str([1,1]):'↘',str([-1,1]):'↙',str([-1,-1]):'↖',str([1,-1]):'↗',str([0,0]):'○'}
+        self._arrow = {str([1,0]):'↓',str([0,1]):'→',str([-1,0]):'↑',str([0,-1]):'←',str([1,1]):'↘',str([-1,1]):'↗',str([-1,-1]):'↖',str([1,-1]):'↙',str([0,0]):'○'}
         self._start = [3,1]
         self._target= [3,5]
         self._open_list = []
@@ -42,8 +43,6 @@ class AStar:
                             self._g[nex[0]][nex[1]] = self._g[current[0]][current[1]]+cost
                             self._d[nex[0]][nex[1]] = str([-d[0],-d[1]])
                     self._f[nex[0]][nex[1]] = self._g[nex[0]][nex[1]]+self._h[nex[0]][nex[1]]
-            print('\n'.join(' '.join(['%2d' % i for i in row]) for row in self._map))
-            print('')
             print('\n'.join(' '.join(['%2d' % i for i in row]) for row in self._f))
             print('')
             print('\n'.join(' '.join(['%2d' % i for i in row]) for row in self._g))
@@ -51,9 +50,17 @@ class AStar:
             print('\n'.join(' '.join(['%2d' % i for i in row]) for row in self._h))
             print('')
             print('\n'.join(' '.join([self._arrow[str(i)] for i in row]) for row in self._d))
-            print(self._open_list)
-            print(self._close_list)
-            time.sleep(1)
+            #print(self._open_list)
+            #print(self._close_list)
+            #time.sleep(1)
+        current = self._target
+        while current!=self._start:
+            if self._map[current[0]][current[1]]==0:
+                self._map[current[0]][current[1]] = 6
+            d = json.loads(self._d[current[0]][current[1]])
+            current = [current[0]+d[0],current[1]+d[1]]
+        print('')
+        print('\n'.join(' '.join(['%2d' % i for i in row]) for row in self._map))
         
             
 
