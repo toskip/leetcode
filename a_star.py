@@ -13,7 +13,7 @@ class AStar:
         self._d1 = [[1,0],[0,1],[-1,0],[0,-1]] #右下左上
         self._d2 = [[1,0],[0,1],[-1,0],[0,-1],[1,1],[-1,1],[-1,-1],[1,-1]] #右下左下左上右上
         self._cost1=[10,10,10,10]
-        self._cost2 = [10,10,10,10,14,14,14,14]
+        self._cost2 = [10,10,10,10,9999,9999,9999,9999]
         self._arrow = {str([1,0]):'↓',str([0,1]):'→',str([-1,0]):'↑',str([0,-1]):'←',str([1,1]):'↘',str([-1,1]):'↗',str([-1,-1]):'↖',str([1,-1]):'↙',str([0,0]):'○'}
         self._start = [3,1]
         self._target= [3,5]
@@ -21,10 +21,12 @@ class AStar:
         self._close_list = []
         self._open_list.append(self._start)
     def run(self):
-        #while len(self._open_list)!=0 and self._target not in self._open_list:
         while len(self._open_list)!=0:
             # find the smallest one
             current = min(self._open_list,key=lambda x:self._f[x[0]][x[1]])
+            print(current)
+            if current==self._target:
+                break
             current_i = self._open_list.index(current)
             self._open_list = self._open_list[:current_i]+self._open_list[current_i+1:]
 
@@ -53,7 +55,7 @@ class AStar:
             print('\n'.join(' '.join([self._arrow[str(i)] for i in row]) for row in self._d))
             #print(self._open_list)
             #print(self._close_list)
-            #time.sleep(1)
+            time.sleep(0.5)
         current = self._target
         while current!=self._start:
             if self._map[current[0]][current[1]]==0:
