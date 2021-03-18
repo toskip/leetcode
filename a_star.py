@@ -12,7 +12,9 @@ class AStar:
         self._h = [[0,0,0,0,0,0,0],[0,0,0,0,0,0,0],[0,0,0,0,0,0,0],[0,0,0,0,0,0,0],[0,0,0,0,0,0,0],[0,0,0,0,0,0,0]]
         self._d1 = [[1,0],[0,1],[-1,0],[0,-1]] #右下左上
         self._d2 = [[1,0],[0,1],[-1,0],[0,-1],[1,1],[-1,1],[-1,-1],[1,-1]] #右下左下左上右上
-        self._arrow = {str([1,0]):'↓',str([0,1]):'→',str([-1,0]):'↑',str([0,-1]):'←',str([0,0]):'○'}
+        self._cost1=[1,1,1,1]
+        self._cost2 = [1,1,1,1,1.414,1.414,1.414,1.414]
+        self._arrow = {str([1,0]):'↓',str([0,1]):'→',str([-1,0]):'↑',str([0,-1]):'←',str([1,1]):'↘',str([-1,1]):'↙',str([-1,-1]):'↖',str([1,-1]):'↗',str([0,0]):'○'}
         self._start = [3,1]
         self._target= [3,5]
         self._open_list = []
@@ -26,17 +28,19 @@ class AStar:
             self._open_list = self._open_list[:current_i]+self._open_list[current_i+1:]
 
             self._close_list.append(current)
-            for d in self._d1:
+            for i in range(len(self._d1)):
+                d = self._d1[i]
+                cost = self._cost1[i]
                 nex = [current[0]+d[0],current[1]+d[1]]
                 if nex[0]>=0 and nex[0]<6 and nex[1]>=0 and nex[1]<7 and self._map[nex[0]][nex[1]]!=9 and nex not in self._close_list:
                     if nex not in self._open_list:
                         self._open_list.append(nex)
-                        self._g[nex[0]][nex[1]] = self._g[current[0]][current[1]]+1
+                        self._g[nex[0]][nex[1]] = self._g[current[0]][current[1]]+cost
                         self._h[nex[0]][nex[1]] = self._distance(nex,self._target)
                         self._d[nex[0]][nex[1]] = str([-d[0],-d[1]])
                     else:
-                        if self._g[current[0]][current[1]]+1<self._g[nex[0]][nex[1]]:
-                            self._g[nex[0]][nex[1]] = self._g[current[0]][current[1]]+1
+                        if self._g[current[0]][current[1]]+cost<self._g[nex[0]][nex[1]]:
+                            self._g[nex[0]][nex[1]] = self._g[current[0]][current[1]]+cost
                             self._d[nex[0]][nex[1]] = str([-d[0],-d[1]])
                     self._f[nex[0]][nex[1]] = self._g[nex[0]][nex[1]]+self._h[nex[0]][nex[1]]
             print('\n'.join(' '.join(['%2d' % i for i in row]) for row in self._map))
