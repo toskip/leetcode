@@ -12,7 +12,7 @@ class AStar:
         self._h = [[0,0,0,0,0,0,0],[0,0,0,0,0,0,0],[0,0,0,0,0,0,0],[0,0,0,0,0,0,0],[0,0,0,0,0,0,0],[0,0,0,0,0,0,0]]
         self._d1 = [[1,0],[0,1],[-1,0],[0,-1]] #右下左上
         self._d2 = [[1,0],[0,1],[-1,0],[0,-1],[1,1],[-1,1],[-1,-1],[1,-1]] #右下左下左上右上
-        self._arrow = {str([1,0]):'→',str([0,1]):'↓',str([-1,0]):'←',str([0,-1]):'↑',str([0,0]):'○'}
+        self._arrow = {str([1,0]):'↓',str([0,1]):'→',str([-1,0]):'↑',str([0,-1]):'←',str([0,0]):'○'}
         self._start = [3,1]
         self._target= [3,5]
         self._open_list = []
@@ -50,7 +50,7 @@ class AStar:
             print('\n'.join(' '.join([self._arrow[str(i)] for i in row]) for row in self._d))
             print(self._open_list)
             print(self._close_list)
-            #time.sleep(1)
+            time.sleep(1)
         
             
 
