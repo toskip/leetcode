@@ -1,4 +1,3 @@
-from heapq import * 
 import time
 class AStar:
     def __init__(self):
@@ -12,8 +11,8 @@ class AStar:
         self._h = [[0,0,0,0,0,0,0],[0,0,0,0,0,0,0],[0,0,0,0,0,0,0],[0,0,0,0,0,0,0],[0,0,0,0,0,0,0],[0,0,0,0,0,0,0]]
         self._d1 = [[1,0],[0,1],[-1,0],[0,-1]] #右下左上
         self._d2 = [[1,0],[0,1],[-1,0],[0,-1],[1,1],[-1,1],[-1,-1],[1,-1]] #右下左下左上右上
-        self._cost1=[1,1,1,1]
-        self._cost2 = [1,1,1,1,1.414,1.414,1.414,1.414]
+        self._cost1=[10,10,10,10]
+        self._cost2 = [10,10,10,10,14,14,14,14]
         self._arrow = {str([1,0]):'↓',str([0,1]):'→',str([-1,0]):'↑',str([0,-1]):'←',str([1,1]):'↘',str([-1,1]):'↙',str([-1,-1]):'↖',str([1,-1]):'↗',str([0,0]):'○'}
         self._start = [3,1]
         self._target= [3,5]
@@ -28,9 +27,9 @@ class AStar:
             self._open_list = self._open_list[:current_i]+self._open_list[current_i+1:]
 
             self._close_list.append(current)
-            for i in range(len(self._d1)):
-                d = self._d1[i]
-                cost = self._cost1[i]
+            for i in range(len(self._d2)):
+                d = self._d2[i]
+                cost = self._cost2[i]
                 nex = [current[0]+d[0],current[1]+d[1]]
                 if nex[0]>=0 and nex[0]<6 and nex[1]>=0 and nex[1]<7 and self._map[nex[0]][nex[1]]!=9 and nex not in self._close_list:
                     if nex not in self._open_list:
